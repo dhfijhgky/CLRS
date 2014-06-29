@@ -4,7 +4,7 @@
 #include<iomanip>
 
 #define array_length 8
-#define format_width 30
+#define format_width 20
 
 using namespace std;
 
@@ -34,11 +34,12 @@ void set_array(int a[], int b[]) {
 
 void print_array(int (&a)[array_length]) {
 //Prints input array to console.
-	for (int i = 0; i < array_length; ++i) {
+	cout << "[ " << a[0];
+	for (int i = 1; i < array_length; ++i) {
 	
-		cout << a[i] << " ";
+		cout << ", " << a[i];
 	}
-	cout << endl;
+	cout << " ]" << endl;
 }
 
 void insert_sort(int a[]) {
@@ -114,29 +115,48 @@ void merge_sort(int a[], int p, int r) {
 	}
 }
 
+void bubble_sort(int a[]) {
+	for (int i = 0; i < array_length - 1; ++i) {
+		for (int j = array_length - 1; j > i; --j) {
+			if (a[j] < a[j - 1]) {
+				int temp = a[j];
+				a[j] = a[j - 1];
+				a[j - 1] = temp;
+			}
+		}
+	}
+}
+
 int main() {
-//Creates two arrays to be sorted: 
-//one by insertion and one by merging
-	int insert_array[array_length], merge_array[array_length];
+//Creates three arrays to be sorted: 
+//one by insertion, one by merging, and one by bubble
+	int insert_array[array_length];
+	int merge_array[array_length];
+	int bubble_array[array_length];
 
 //Defines the arrays with user input.
 	array_input(insert_array);
 
 //Repeats the input array to user.
-	cout << setw(format_width) << "Your array: ";
+	cout << setw(format_width) << "Your array:  ";
 	print_array(insert_array);
 
-//Then, sets merge array to insert array and sorts both.
+//Then, sets merge and bubble array to insert array and sorts all three.
 	set_array(merge_array, insert_array);
+	set_array(bubble_array, insert_array);
 	insert_sort(insert_array);
 	merge_sort(merge_array, 1, array_length);
+	bubble_sort(bubble_array);
 
 //Outputs sorted arrays to user.
-	cout << endl << setw(format_width) << "Insertion sorted: ";
+	cout << endl << setw(format_width) << "Insertion sorted:  ";
 	print_array(insert_array);
 
-	cout << endl << setw(format_width) << "Merge sorted: ";
+	cout << endl << setw(format_width) << "Merge sorted:  ";
 	print_array(merge_array);
+
+	cout << endl << setw(format_width) << "Bubble sorted:  ";
+	print_array(bubble_array);
 	
 //Pauses to read output.
 	cin.ignore();
