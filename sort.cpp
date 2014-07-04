@@ -74,11 +74,11 @@ void merge(int a[], int p, int q, int r) {
 	//Setting our left and right arrays to the appropriate
 	//values from our main array.
 	for (int i = 0; i < left_length; ++i) {
-		left[i] = a[p + i - 1];
+		left[i] = a[p + i];
 	}
 
 	for (int i = 0; i < right_length; ++i) {
-		right[i] = a[q + i];
+		right[i] = a[q + i + 1];
 	}
 	
 	//Since infinity is unobtainble using integers, 
@@ -90,7 +90,7 @@ void merge(int a[], int p, int q, int r) {
 	int x = 0;
 	int y = 0;
 
-	for (int i = p - 1; i < r; i++) {
+	for (int i = p; i <= r; i++) {
 	//Checking our arrays against each other and putting
 	//the smaller integer first in the main array.
 		if (left[x] <= right[y]) {
@@ -145,7 +145,7 @@ int main() {
 	set_array(merge_array, insert_array);
 	set_array(bubble_array, insert_array);
 	insert_sort(insert_array);
-	merge_sort(merge_array, 1, array_length);
+	merge_sort(merge_array, 0, array_length - 1);
 	bubble_sort(bubble_array);
 
 //Outputs sorted arrays to user.

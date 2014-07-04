@@ -83,11 +83,11 @@ void merge(vector<int>& a, int p, int q, int r) {
 	//Setting our left and right arrays to the appropriate
 	//values from our main vector.
 	for (int i = 0; i < left_length; ++i) {
-		left[i] = a[p + i - 1];
+		left[i] = a[p + i];
 	}
 
 	for (int i = 0; i < right_length; ++i) {
-		right[i] = a[q + i];
+		right[i] = a[q + i + 1];
 	}
 	
 	//Since infinity is unobtainble using integers, 
@@ -99,7 +99,7 @@ void merge(vector<int>& a, int p, int q, int r) {
 	int x = 0;
 	int y = 0;
 
-	for (int i = p - 1; i < r; i++) {
+	for (int i = p; i <= r; i++) {
 	//Checking our arrays against each other and putting
 	//the smaller integer first in the main vector.
 		if (left[x] <= right[y]) {
@@ -157,7 +157,7 @@ int main() {
 	set_vector(bubble_vector, base_vector);
 
 	insert_sort(insert_vector);
-	merge_sort(merge_vector, 1, merge_vector.size());
+	merge_sort(merge_vector, 0, merge_vector.size() - 1);
 	bubble_sort(bubble_vector);
 
 //Outputs sorted vectors to user.
